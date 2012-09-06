@@ -77,14 +77,17 @@ class Shirt
     content_type :json
     @shirt = Shirt.new(params[:shirt])
     @shirt.save
-    @shirt.to_json
+    JSON.generate(params[:shirt])
   end
 
   get '/search' do
     content_type :json
     {"params" => CGI::parse(request.query_string)}.to_json
-    puts params.class
-    # collection(params[:shirt]).find.toa.map{|t| frombsonid(t)}.to_json
+#    puts params.class -- this is returning a hash, not json
+#    Mongoid.collection(params[:shirt]).find.toa.map{|t| frombsonid(t)}.to_json
+    # Shirt.where(color: params[:shirt][:color]).each do |shirt|
+    #   JSON.generate(shirt)
+    # end
     # db.shirts.find({x:4}, {j:true}).forEach(printjson);
   end
   
