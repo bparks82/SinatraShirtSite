@@ -1,0 +1,19 @@
+Project Instructions: 
+Create a sinatra application that uses mongoid to access mongodb. Create a class representing a "shirt" that has the following fields:
+- color (string)
+- witty_saying (string)
+- size (integer)
+- created_at (datetime)
+- updated_at (datetime) - use Time.now upon an edit action, otherwise defaults to nil
+ When a Shirt is created, it should also have timestamps automatically appended to the document indicating when it was created and last updated.
+
+Create a simple form that will allow me to create a Shirt, POST it through sinatra into mongodb and return a JSON representation of the Shirt to be displayed (in plain text) after submitting the form.
+
+Create a 'search' route in sinatra that allows me to pass in a query string to return expected results from mongodb. The results should be an array of JSON objects.
+Example: /search?color=red&size=2
+
+Bonus: (not required, but fun/interesting...this took me a while to figure out)
+Augment the search functionality to allow a mechanism to do searches like "size > 2". Only need ">", "<", ">=" and "<=" functionality. (Hint: You can only use the equal sign on query string key-value pairs, so it has to be by some other method...still on the query string, though.)
+
+
+Set up connection

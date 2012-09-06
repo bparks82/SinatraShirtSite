@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SinatraShirts</title>
+</head>
+<body>
+  <h1>Make your dream shirt</h1>
+
+  <form accept-charset="UTF-8" action="/" class="new_shirt" id="new_shirt" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="xQjavh+KPYvxYBYAOl2GH4pa7JY6Uygp/PHyfqomh4Q=" /></div>
+  <p>
+  	<label for="shirt_color">Color</label><br />
+  	<input id="shirt_color" name="shirt[color]" size="30" type="text" />
+  </p>  
+  <p>
+    <label for="shirt_size">Size (available in 1-10)</label><br />
+    <input id="shirt_size" name="shirt[size]" size="30" type="number" />  
+  </p>
+  <p>
+  	<label for="shirt_witty_saying">Your Wittiest Saying</label><br />
+  	<input id="shirt_witty_saying" name="shirt[witty_saying]" size="30" type="text" />  
+  </p>
+  <p>
+  	<input name="commit" type="submit" value="Create Shirt" />
+  </p>
+</form>
+</body>
+</html>
