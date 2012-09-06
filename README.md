@@ -10,4 +10,5 @@ gem "bson_ext"
 Learnings:
 
 - Whenever you make a change to your Sinatra app you have to restart the server (using ctrl-c).  Then revisit your local connection and refresh the page.
-- Here's a nice little <a href = "http://net.tutsplus.com/tutorials/ruby/singing-with-sinatra/">Tutorial</a>
+- Here's a nice little <a href = "http://net.tutsplus.com/tutorials/ruby/singing-with-sinatra/", target= "_blank">Tutorial</a>
+- To get the equivalent of Rails console for a Sinatra app, use: irb -r my_sinatra_app.rb.  Using pry, it's: pry -r my_sinatra_app.rb
