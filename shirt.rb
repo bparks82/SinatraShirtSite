@@ -3,7 +3,7 @@ require 'mongoid'
 require 'json'
 require 'sinatra/reloader' if development?
 
-Mongoid.load!("../config/mongoid.yml")
+Mongoid.load!("mongoid.yml")
 
 get '/' do
   "Hello World"
