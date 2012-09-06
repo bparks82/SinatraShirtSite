@@ -33,7 +33,7 @@ class Shirt
   get '/' do
     shirt = Shirt.new(:color => "yellow", :witty_saying => "you can do it", :size => 4)
 #   shirt.save
-    "Here's your size #{shirt.size},#{shirt.color} shirt, which reads #{shirt.witty_saying} "
+    "Here's your size #{shirt.size},#{shirt.color} shirt, which reads #{shirt.witty_saying}"
   end
 
   get '/env' do
