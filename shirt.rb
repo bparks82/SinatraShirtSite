@@ -10,8 +10,8 @@ get '/' do
 end
 
 
-Mongoid by default stores documents in a collection that is the pluralized form of the class name.
-Thus our shirt objects will be stored in a collection named shirts
+# Mongoid by default stores documents in a collection that is the pluralized form of the class name.
+# Thus our shirt objects will be stored in a collection named shirts
 
 class Shirt
   # Documents are the core objects in Mongoid and any object that is to be persisted to the database must include Mongoid::Document
