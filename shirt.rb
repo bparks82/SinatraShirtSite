@@ -5,9 +5,9 @@ require 'sinatra/reloader' if development?
 
 Mongoid.load!("mongoid.yml")
 
-get '/' do
-  "Hello World"
-end
+# get '/' do
+#   "Hello World"
+# end
 
 
 # Mongoid by default stores documents in a collection that is the pluralized form of the class name.
@@ -32,7 +32,7 @@ class Shirt
   get '/' do
 
     shirt = Shirt.new(:color => "yellow", :witty_saying => "you can do it", :size => 4)
-    shirt.save
+#   shirt.save
     "Here's your size #{shirt.size},#{shirt.color} shirt, which reads #{shirt.witty_saying} "
   end
 
