@@ -3,7 +3,12 @@ require 'mongoid'
 require 'json'
 require 'sinatra/reloader' if development?
 
-Mongoid.load!("mongoid.yml")
+Mongoid.load!("../config/mongoid.yml")
+
+get '/' do
+  "Hello World"
+end
+
 
 # Mongoid by default stores documents in a collection that is the pluralized form of the class name.
 # Thus our shirt objects will be stored in a collection named shirts
