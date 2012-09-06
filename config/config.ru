@@ -1,3 +1,3 @@
 require 'sinatra'
-require './app'
+require '../lib/shirt'
 run Sinatra::Application
