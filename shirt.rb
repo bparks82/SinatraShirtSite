@@ -82,21 +82,46 @@ class Shirt
   get '/search' do
     content_type :json
     params = request.params
-    @shirts = {}
-    Shirt.where(:color => params["color"], :size => params["size"].to_i).map do |shirt|
-      puts shirt.inspect
-      # @shirts << JSON.generate(shirt)
+    @query_color = params["color"]
+    @query_size = params["size"].to_i
+    @query_witty_saying = params["witty_saying"]
+    
+    @shirts = []
+    Shirt.where(:color => @query_color, :size => @query_size).map do |shirt|
+      @shirts << shirt.inspect
+      JSON.generate(@shirts)
     end
   end
 
    #  db.shirts.find({x:4}, {j:true}).forEach(printjson);
 
-  # get '/' do
-  #   shirt = Shirt.new(:color => "yellow", :witty_saying => "you can do it", :size => 4)
-  #   shirt.save
-  #   Shirt.where(:size.lte => 2).each { |result| puts result.inspect }
-  #   Shirt.where(:size.gte => 4).each { |result| puts result.inspect }
-  #   "Here's your size #{shirt.size},#{shirt.color} shirt, which reads #{shirt.witty_saying}"
-  # end
+# a little extra challenge
+private
+  
+  def has_value?
+    
+  end
+  
+  def query_string_to_params_to_db(*args)
+    # args.merge({:include })
+  end
+  
+  def size_greater_than
+    Shirt.where(:size.gt => params["size"].to_i).each { |result| puts result.inspect }
+  end
+  
+  def size_less_than
+    Shirt.where(:size.lt => params["size"].to_i).each { |result| puts result.inspect }
+  end
+
+  def size_greater_than_or_equal
+    Shirt.where(:size.gte => params["size"].to_i).each { |result| puts result.inspect }
+  end
+    
+  def size_less_than_or_equal
+    Shirt.where(:size.lte => params["size"].to_i).each { |result| puts result.inspect }
+  end
+  
+
 
 end
