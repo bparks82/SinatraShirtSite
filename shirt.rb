@@ -51,9 +51,9 @@ class Shirt
 # field :c_at, as: :created_at, type: DateTime, default: ->{ Time.now }
 # field :u_at, as: :updated_at, type: DateTime
 
-  # Setting the root path to 
+  # Sets the root and views paths 
   configure do
-   # set :root, File.dirname(__FILE__)
+   set :root, '/'
    set :views, File.dirname(__FILE__) + "/views"
   end
   
@@ -63,12 +63,8 @@ class Shirt
   #   render "html.erb", template, options, locals
   # end
 
-  # def to_json 
-  #   super
-  # end
-
+  # renders 'new' template from views directory.  Submitting the form triggers a Post request that writes to the DB
   get '/' do
-    #'foobar'
     @shirt = Shirt.new
     erb :new
   end
@@ -81,21 +77,20 @@ class Shirt
     JSON.generate(params[:shirt])
   end
 
+  # parses query string into params hash and then queries database based upon the values from the params hash, looking for matches 
+  # to render as an array of JSON objects
   get '/search' do
     content_type :json
     params = request.params
-    puts params
-    
-   # params = JSON.generate(CGI::parse(request.query_string))
-   #  @shirts = Shirt.find(params)
-   #  JSON.generate(params)
-   #  Mongoid.collection(params[:shirt]).find.toa.map{|t| frombsonid(t)}.to_json
-   #  Shirt.where(color: params[:shirt][:color]).each do |shirt|
-   #    JSON.generate(shirt)
-   #  end
-   #  db.shirts.find({x:4}, {j:true}).forEach(printjson);
+    @shirts = {}
+    Shirt.where(:color => params["color"], :size => params["size"].to_i).map do |shirt|
+      puts shirt.inspect
+      # @shirts << JSON.generate(shirt)
+    end
   end
-  
+
+   #  db.shirts.find({x:4}, {j:true}).forEach(printjson);
+
   # get '/' do
   #   shirt = Shirt.new(:color => "yellow", :witty_saying => "you can do it", :size => 4)
   #   shirt.save
