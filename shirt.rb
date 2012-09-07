@@ -4,7 +4,8 @@ require 'mongoid'
 require 'json'
 require 'sinatra/reloader' if development?
 require 'erb'
-require 'cgi'
+
+# require 'cgi'
 # after hours of searching, reading docs, and trying everything under the sun, this solution finally worked. 
 # Verified that Mongoid is connected to my Mongo dev db through the Sinatra console and server.
 configure do
@@ -78,33 +79,29 @@ class Shirt
   end
 
   # parses query string into params hash and then queries database based upon the values from the params hash, looking for matches 
-  # to render as an array of JSON objects
+  # which it renders as an array of JSON objects
   get '/search' do
     content_type :json
     params = request.params
-    @query_color = params["color"]
-    @query_size = params["size"].to_i
-    @query_witty_saying = params["witty_saying"]
+    params["color"].nil? ? nil : @query_color = params["color"]
+    params["size"].nil? ? nil : @query_size = params["size"].to_i
+    params["witty_saying"].nil? ? nil : @query_witty_saying = params["witty_saying"]  
     
-    @shirts = []
-    Shirt.where(:color => @query_color, :size => @query_size).map do |shirt|
-      @shirts << shirt.inspect
-      JSON.generate(@shirts)
+    @shirts_array = []
+    @shirts_returned = Shirt.where(:color => @query_color, :size => @query_size, :witty_saying => @query_witty_saying).to_a
+    @shirts_returned.map do |shirt|
+      @shirts_array << shirt.inspect
     end
+    JSON.generate(@shirts_array)
   end
 
-   #  db.shirts.find({x:4}, {j:true}).forEach(printjson);
 
-# a little extra challenge
+# a little extra challenge -- work in process
 private
   
-  def has_value?
-    
-  end
-  
-  def query_string_to_params_to_db(*args)
-    # args.merge({:include })
-  end
+  # def query_string_to_params_to_db(*args)
+  #   # args.merge({:include })
+  # end
   
   def size_greater_than
     Shirt.where(:size.gt => params["size"].to_i).each { |result| puts result.inspect }
@@ -121,7 +118,4 @@ private
   def size_less_than_or_equal
     Shirt.where(:size.lte => params["size"].to_i).each { |result| puts result.inspect }
   end
-  
-
-
 end
