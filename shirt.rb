@@ -73,6 +73,7 @@ class Shirt
     erb :new
   end
 
+  # accepts parameters from form, saves newly instantiated shirt document to db and returns valid json object (as validated by jslint.com)
   post '/' do
     content_type :json
     @shirt = Shirt.new(params[:shirt])
@@ -82,13 +83,17 @@ class Shirt
 
   get '/search' do
     content_type :json
-    {"params" => CGI::parse(request.query_string)}.to_json
-#    puts params.class -- this is returning a hash, not json
-#    Mongoid.collection(params[:shirt]).find.toa.map{|t| frombsonid(t)}.to_json
-    # Shirt.where(color: params[:shirt][:color]).each do |shirt|
-    #   JSON.generate(shirt)
-    # end
-    # db.shirts.find({x:4}, {j:true}).forEach(printjson);
+    params = request.params
+    puts params
+    
+   # params = JSON.generate(CGI::parse(request.query_string))
+   #  @shirts = Shirt.find(params)
+   #  JSON.generate(params)
+   #  Mongoid.collection(params[:shirt]).find.toa.map{|t| frombsonid(t)}.to_json
+   #  Shirt.where(color: params[:shirt][:color]).each do |shirt|
+   #    JSON.generate(shirt)
+   #  end
+   #  db.shirts.find({x:4}, {j:true}).forEach(printjson);
   end
   
   # get '/' do
